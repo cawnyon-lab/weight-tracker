@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tracker Berat Badan</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h1>Tracker Berat Badan</h1>
+      <p>Target 50 kg sebelum 30 April 2026</p>
+      <div class="progress-section">
+        <div class="progress-meta">
+          <span id="curWeightLabel">56 kg</span>
+          <span class="muted">Target: 50 kg</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="mainProgress"></div>
+        </div>
+        <div class="progress-label">
+          <span id="progressPct">0% tercapai</span>
+          <span id="daysLeft"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" data-tab="log">Log Harian</button>
+      <button class="tab" data-tab="progress">Progress</button>
+      <button class="tab" data-tab="badges">Badges</button>
+    </div>
+
+    <!-- LOG TAB -->
+    <div class="section active" id="tab-log">
+      <div class="card">
+        <div class="card-title">Catat hari ini</div>
+        <div class="field">
+          <label>Berat badan hari ini (kg)</label>
+          <input type="number" id="inputWeight" placeholder="cth: 55.5" step="0.1" min="30" max="200" />
+        </div>
+        <div class="log-row">
+          <div class="field">
+            <label>Kalori (kkal)</label>
+            <input type="number" id="inputCalories" placeholder="1800" />
+          </div>
+          <div class="field">
+            <label>Olahraga (menit)</label>
+            <input type="number" id="inputExercise" placeholder="30" />
+          </div>
+          <div class="field">
+            <label>Air putih (liter)</label>
+            <input type="number" id="inputWater" step="0.1" placeholder="2.0" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Jenis olahraga (opsional)</label>
+          <input type="text" id="inputActivity" placeholder="cth: jogging, gym, jalan kaki" />
+        </div>
+        <button class="btn-primary" id="btnSave">Simpan log hari ini</button>
+        <div id="saveStatus" class="status-msg"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Riwayat log</div>
+        <div class="log-list" id="logList">
+          <div class="empty-state">Memuat data...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRESS TAB -->
+    <div class="section" id="tab-progress">
+      <div class="stats-grid three">
+        <div class="stat-card">
+          <div class="stat-num" id="statLoss">0</div>
+          <div class="stat-unit">kg</div>
+          <div class="stat-label">Total turun</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statStreak">0</div>
+          <div class="stat-unit">hari</div>
+          <div class="stat-label">Streak log</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statLogs">0</div>
+          <div class="stat-unit">entri</div>
+          <div class="stat-label">Total log</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Grafik berat badan</div>
+        <div class="chart-wrap">
+          <canvas id="weightChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Ringkasan bulan ini</div>
+        <div class="stats-grid three">
+          <div class="stat-card">
+            <div class="stat-num" id="statAvgCal">–</div>
+            <div class="stat-unit">kkal</div>
+            <div class="stat-label">Rata-rata kalori</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statAvgWater">–</div>
+            <div class="stat-unit">liter</div>
+            <div class="stat-label">Rata-rata air</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statTotalEx">–</div>
+            <div class="stat-unit">menit</div>
+            <div class="stat-label">Total olahraga</div>
+          </div>
+        </div>
+        <div class="stats-grid two" style="margin-top: 8px;">
+          <div class="stat-card">
+            <div class="stat-num" id="statHealthyDays">0</div>
+            <div class="stat-label">Hari makan sehat (&lt;2000 kkal)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="statHydrated">0</div>
+            <div class="stat-label">Hari cukup minum (≥2L)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Streak 7 hari terakhir</div>
+        <div class="streak-row" id="streakRow"></div>
+        <div class="tip" id="tipText">Catat setiap hari untuk menjaga streak-mu!</div>
+      </div>
+    </div>
+
+    <!-- BADGES TAB -->
+    <div class="section" id="tab-badges">
+      <div class="badges-grid" id="badgesGrid"></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
